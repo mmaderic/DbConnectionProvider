@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Authors>Mateo Mađerić</Authors>
+    <Company></Company>
+    <Description>Provides abstracted database connection or transaction objects, which can easily be shared and injected in asp.net core applications.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DbConnectionProvider.Abstractions\DbConnectionProvider.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>
