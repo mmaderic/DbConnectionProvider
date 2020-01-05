@@ -14,7 +14,7 @@ namespace DbConnectionProvider
 
         public TConnection Provide()
         {
-            if (_connection == null)
+            if (_connection is null)
             {
                 _connection = new TConnection { ConnectionString = _connectionString };
                 _connection.Open();
