@@ -5,6 +5,11 @@
     <Authors>Mateo Mađerić</Authors>
     <Company></Company>
     <Description>Provides abstracted database connection or transaction objects, which can easily be shared and injected in asp.net core applications.</Description>
+    <PackageProjectUrl />
+    <RepositoryUrl>https://github.com/mmaderic/DbConnectionProvider</RepositoryUrl>
+    <RepositoryType>Github</RepositoryType>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
