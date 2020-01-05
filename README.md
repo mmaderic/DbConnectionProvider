@@ -1,7 +1,7 @@
 DbConnectionProvider
 =====================
 
-Provides abstracted database connection or transaction objects, which can easily be shared and injected in asp.net core applications.
+Provides abstracted database connection or transaction objects, which can easily be shared, managed and injected in asp.net core applications.
 
 ### Installing DbConnectionProvider
 
