@@ -1,7 +1,7 @@
 ﻿
 namespace DbConnectionProvider.Abstractions
 {
-    public interface IConnectionStringProvider
+    public interface IDbConnectionStringProvider
     {
         public string ProvideFor(string databaseName);
     }

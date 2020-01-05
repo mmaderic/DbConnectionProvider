@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace DbConnectionProvider.Configuration
 {
-    public class ConnectionStringProvider : IConnectionStringProvider
+    public class ConnectionStringProvider : IDbConnectionStringProvider
     {
         private readonly IEnumerable<ConnectionStringConfiguration> _connectionStrings;
 
