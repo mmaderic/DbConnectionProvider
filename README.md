@@ -39,7 +39,7 @@ Code snippet below is using connection provider for Microsoft.Data.SqlClient.Sql
     
 In order to use TransactionManager please note it currently does not support distributed transactions. Transactions to multiple databases  will be commited independently. Feature will be added after .NET 5.0 release, when the required support is implemented.
 
-Required configuration for transaction manager:
+Transaction manager required configuration:
 
     serviceCollection.AddScoped<IDbTransactionProvider>(x => x.GetRequiredService<IDbTransactionProvider<SqlTransaction>>());
 
