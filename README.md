@@ -20,15 +20,22 @@ Either commands, from Package Manager Console or .NET Core CLI, will download an
 
 Code snipped below is using connection provider for Microsoft.Data.SqlClient.SqlConnection
 
-    services.AddScoped<IDbConnectionProvider<SqlConnection>, ConnectionProvider<SqlConnection>>(x => 
+    public static void RegisterServices(IServiceCollection serviceCollection, IConfiguration configuration)
     {
-        var connectionString = x.GetRequiredService<IConnectionStringProvider>()
-            .ProvideFor(Configuration.Plugins.Identity.DatabaseName);
+        var connectionStrings = configuration.ReadConnectionStrings();
+        serviceCollection.AddSingleton<IDbConnectionStringProvider, ConnectionStringProvider>(
+            x => new ConnectionStringProvider(connectionStrings));
+        
+        serviceCollection.AddScoped<IDbConnectionProvider<SqlConnection>, ConnectionProvider<SqlConnection>>(x => 
+        {
+            var connectionString = x.GetRequiredService<IConnectionStringProvider>()
+                .ProvideFor(Configuration.Plugins.Identity.DatabaseName);
 
-        return new ConnectionProvider<SqlConnection>(connectionString);
-    });
+            return new ConnectionProvider<SqlConnection>(connectionString);
+        });
 
-    services.AddScoped<IDbTransactionProvider<SqlTransaction>, TransactionProvider<SqlConnection, SqlTransaction>>();
+        serviceCollection.AddScoped<IDbTransactionProvider<SqlTransaction>, TransactionProvider<SqlConnection, SqlTransaction>>();
+    }
 
 
 
