@@ -2,19 +2,18 @@
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Threading.Tasks;
 
 namespace DbConnectionProvider
 {
     public class TransactionManager : IDbTransactionManager
     {
-        private readonly IEnumerable<IDbTransactionProvider<IDbTransaction>> _transactionProviders;
+        private readonly IEnumerable<IDbTransactionProvider> _transactionProviders;
         private bool _transactionOwnerSet;
         private bool _rollBackTransaction;
 
-        public TransactionManager(IServiceProvider serviceProvider) =>
-            _transactionProviders = serviceProvider.GetServices<IDbTransactionProvider<IDbTransaction>>();
+        public TransactionManager(IServiceProvider servicesProvider) =>
+            _transactionProviders = servicesProvider.GetServices<IDbTransactionProvider>();
 
         public bool TrySetTransactionOwner()
         {

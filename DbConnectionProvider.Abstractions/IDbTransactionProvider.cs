@@ -2,11 +2,15 @@
 
 namespace DbConnectionProvider.Abstractions
 {
-    public interface IDbTransactionProvider<T>
-        where T : IDbTransaction
+    public interface IDbTransactionProvider
     {
-        public T Provide();
         public void CommitTransaction();
         public void RollbackTransaction();
+    }
+
+    public interface IDbTransactionProvider<T> : IDbTransactionProvider
+        where T : IDbTransaction
+    {
+        public T Provide();        
     }
 }
