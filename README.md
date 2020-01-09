@@ -18,7 +18,7 @@ Either commands, from Package Manager Console or .NET Core CLI, will download an
 
 ### Provider registration example
 
-Code snipped below is using connection provider for Microsoft.Data.SqlClient.SqlConnection
+Code snippet below is using connection provider for Microsoft.Data.SqlClient.SqlConnection
 
     public static void RegisterServices(IServiceCollection serviceCollection, IConfiguration configuration)
     {
@@ -36,6 +36,13 @@ Code snipped below is using connection provider for Microsoft.Data.SqlClient.Sql
 
         serviceCollection.AddScoped<IDbTransactionProvider<SqlTransaction>, TransactionProvider<SqlConnection, SqlTransaction>>();
     }
+    
+In order to use TransactionManager please note it currently does not support distributed transactions. Transactions to multiple databases  will be commited independently. Feature will be added after .NET 5.0 release, when the required support is implemented.
+
+Required configuration for transaction manager:
+
+    serviceCollection.AddScoped<IDbTransactionProvider>(x => x.GetRequiredService<IDbTransactionProvider<SqlTransaction>>());
+
 
 
 
