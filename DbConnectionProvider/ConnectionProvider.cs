@@ -7,6 +7,7 @@ namespace DbConnectionProvider
     public class ConnectionProvider<TConnection> : IDbConnectionProvider<TConnection>, IDisposable
         where TConnection : IDbConnection, new()
     {
+        private readonly object lockObject = new object();
         private readonly string _connectionString;
         private TConnection _connection;
 
@@ -14,23 +15,29 @@ namespace DbConnectionProvider
 
         public TConnection Provide()
         {
-            if (_connection is null)
+            lock (lockObject)
             {
-                _connection = new TConnection { ConnectionString = _connectionString };
-                _connection.Open();
-            }
+                if (_connection is null)
+                {
+                    _connection = new TConnection { ConnectionString = _connectionString };
+                    _connection.Open();
+                }
 
-            return _connection;
+                return _connection;
+            }
         }
 
         public void Close() => Dispose();
 
         public void Dispose()
         {
-            _connection?.Close();
-            _connection?.Dispose();
+            lock (lockObject)
+            {
+                _connection?.Close();
+                _connection?.Dispose();
 
-            _connection = default;
+                _connection = default;
+            }
         }
     }
 }

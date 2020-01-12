@@ -2,7 +2,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace DbConnectionProvider
 {
@@ -29,8 +28,8 @@ namespace DbConnectionProvider
             if (_rollBackTransaction)
                 return;
 
-            Parallel.ForEach(_transactionProviders,
-                provider => provider.CommitTransaction());
+            foreach(var provider in _transactionProviders)
+                provider.CommitTransaction();
         }
 
         public void RollbackTransaction()
@@ -38,8 +37,8 @@ namespace DbConnectionProvider
             if (_rollBackTransaction)
                 return;
 
-            Parallel.ForEach(_transactionProviders,
-                provider => provider.RollbackTransaction());
+            foreach (var provider in _transactionProviders)
+                provider.RollbackTransaction();
 
             _rollBackTransaction = true;
         }
