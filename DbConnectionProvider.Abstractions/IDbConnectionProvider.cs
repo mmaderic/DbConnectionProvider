@@ -2,10 +2,19 @@
 
 namespace DbConnectionProvider.Abstractions
 {
-    public interface IDbConnectionProvider<T>
-    where T : IDbConnection
+    public interface IDbConnectionProvider
     {
-        public T Provide();
-        public void Close();
+        public string Identifier { get; }
+        public void CloseConnection();
+        public void CommitTransaction();
+        public void RollbackTransaction();
+    }
+
+    public interface IDbConnectionProvider<TConnection, TTransaction> : IDbConnectionProvider
+    where TConnection : IDbConnection
+    where TTransaction : IDbTransaction
+    {
+        public TConnection ProvideConnection();
+        public TTransaction ProvideTransaction();
     }
 }
