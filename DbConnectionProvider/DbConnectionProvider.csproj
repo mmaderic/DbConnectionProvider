@@ -19,7 +19,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DbConnectionProvider.Abstractions\DbConnectionProvider.Abstractions.csproj" />
-    <ProjectReference Include="..\DbConnectionProvider.Configuration\DbConnectionProvider.Configuration.csproj" />
   </ItemGroup>
 
 </Project>
