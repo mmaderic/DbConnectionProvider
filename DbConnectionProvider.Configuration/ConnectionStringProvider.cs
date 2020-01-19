@@ -13,5 +13,8 @@ namespace DbConnectionProvider.Configuration
 
         public string ProvideFor(string identifier)
             => _connectionStrings.Single(x => x.Identifier == identifier).ConnectionString;
+
+        public int DataSourceCount()
+            => _connectionStrings.Count();
     }
 }
