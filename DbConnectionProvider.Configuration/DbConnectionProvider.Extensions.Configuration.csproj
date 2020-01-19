@@ -3,19 +3,19 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Authors>Mateo Mađerić</Authors>
-    <Description>Provides simple connection string configuration extension</Description>
+    <Description>Configuration options suitable for DbConnectionProvider</Description>
     <RepositoryUrl>https://github.com/mmaderic/DbConnectionProvider</RepositoryUrl>
     <RepositoryType>Github</RepositoryType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Version>1.0.4</Version>
+    <Version>1.0.0</Version>
+    <PackageId>DbConnectionProvider.Extensions.Configuration</PackageId>
+    <Product>DbConnectionProvider.Extensions.Configuration</Product>
+    <AssemblyName>DbConnectionProvider.Extensions.Configuration</AssemblyName>
+    <RootNamespace>DbConnectionProvider.Extensions.Configuration</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\DbConnectionProvider.Abstractions\DbConnectionProvider.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>

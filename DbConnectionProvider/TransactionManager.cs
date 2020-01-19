@@ -1,4 +1,4 @@
-﻿using DbConnectionProvider.Abstractions;
+﻿using DbConnectionProvider.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
