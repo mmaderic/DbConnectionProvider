@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace DbConnectionProvider.Configuration
+namespace DbConnectionProvider.Extensions.Configuration
 {
     public class ConnectionStringProvider : IDbConnectionStringProvider
     {

@@ -1,5 +1,5 @@
 ﻿
-namespace DbConnectionProvider.Configuration
+namespace DbConnectionProvider.Extensions.Configuration
 {
     public class ConnectionStringConfiguration
     {

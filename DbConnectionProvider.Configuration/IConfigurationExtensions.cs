@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DbConnectionProvider.Configuration
+namespace DbConnectionProvider.Extensions.Configuration
 {
     public static class IConfigurationExtensions
     {
