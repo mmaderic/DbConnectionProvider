@@ -1,5 +1,5 @@
 ﻿
-namespace DbConnectionProvider.Abstractions
+namespace DbConnectionProvider.Configuration
 {
     public interface IDbConnectionStringProvider
     {
