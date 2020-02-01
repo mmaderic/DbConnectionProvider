@@ -1,4 +1,4 @@
-﻿using DbConnectionProvider.Interfaces;
+﻿using DbConnectionProvider.Abstractions;
 using System;
 using System.Data;
 
