@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29521.150
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbConnectionProvider", "DbConnectionProvider\DbConnectionProvider.csproj", "{3D5ADDD8-6311-4EC7-89CC-CF7F7F7DD256}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbConnectionProvider.Extensions.Configuration", "DbConnectionProvider.Configuration\DbConnectionProvider.Extensions.Configuration.csproj", "{3714726A-8DA1-41D8-88FF-3879EA63E4E7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbConnectionProvider.Abstractions", "DbConnectionProvider.Abstractions\DbConnectionProvider.Abstractions.csproj", "{50165223-56DF-4141-8C91-5EA9CFFEC191}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{3D5ADDD8-6311-4EC7-89CC-CF7F7F7DD256}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D5ADDD8-6311-4EC7-89CC-CF7F7F7DD256}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D5ADDD8-6311-4EC7-89CC-CF7F7F7DD256}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3714726A-8DA1-41D8-88FF-3879EA63E4E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3714726A-8DA1-41D8-88FF-3879EA63E4E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3714726A-8DA1-41D8-88FF-3879EA63E4E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3714726A-8DA1-41D8-88FF-3879EA63E4E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50165223-56DF-4141-8C91-5EA9CFFEC191}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50165223-56DF-4141-8C91-5EA9CFFEC191}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50165223-56DF-4141-8C91-5EA9CFFEC191}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50165223-56DF-4141-8C91-5EA9CFFEC191}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
