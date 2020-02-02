@@ -13,6 +13,8 @@ namespace DbConnectionProvider.Abstractions
 
         public IDbConnectionProvider<TConnection, TTransaction> ResolveFor<TConnection, TTransaction>(string identifier)
             where TConnection : IDbConnection
-            where TTransaction : IDbTransaction;    
+            where TTransaction : IDbTransaction;
+
+        public int DataSourceCount();
     }
 }

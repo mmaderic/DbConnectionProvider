@@ -34,6 +34,8 @@ namespace DbConnectionProvider
         {
             foreach (var provider in _connectionProviders)
                 provider.CloseConnection();
-        }        
+        }
+
+        public int DataSourceCount() => _connectionProviders.Count();
     }
 }
