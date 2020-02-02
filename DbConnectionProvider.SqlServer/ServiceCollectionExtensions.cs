@@ -3,6 +3,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace DbConnectionProvider.SqlServer
@@ -30,6 +31,34 @@ namespace DbConnectionProvider.SqlServer
                     .Single(x => x.Identifier == connection.Identifier));
 
                 serviceCollection.AddScoped(x => (SqlConnectionProvider) x.GetServices<IDbConnectionProvider<SqlConnection, SqlTransaction>>()
+                    .Single(x => x.Identifier == connection.Identifier));
+            }
+
+            serviceCollection.AddScoped<IDbConnectionResolver, ConnectionResolver>();
+            serviceCollection.AddScoped<IDbTransactionManager, TransactionManager>();
+
+            return serviceCollection;
+        }
+
+        /// <summary>
+        /// Registers connection providers using provided connection string configurations.
+        /// Registers connection resolver and transaction manager. Recomended when you have multiple data sources.
+        /// </summary>
+        public static IServiceCollection AddSqlConnectionProviders(
+            this IServiceCollection serviceCollection, IEnumerable<ConnectionStringConfiguration> connectionStringConfigurations)
+        {
+            serviceCollection.AddSingleton<IDbConnectionStringProvider, ConnectionStringProvider>(
+                x => new ConnectionStringProvider(connectionStringConfigurations));
+
+            foreach (var connection in connectionStringConfigurations)
+            {
+                serviceCollection.AddScoped<IDbConnectionProvider<SqlConnection, SqlTransaction>>(
+                    x => new SqlConnectionProvider(connection.ConnectionString, connection.Identifier));
+
+                serviceCollection.AddScoped<IDbConnectionProvider>(x => x.GetServices<IDbConnectionProvider<SqlConnection, SqlTransaction>>()
+                    .Single(x => x.Identifier == connection.Identifier));
+
+                serviceCollection.AddScoped(x => (SqlConnectionProvider)x.GetServices<IDbConnectionProvider<SqlConnection, SqlTransaction>>()
                     .Single(x => x.Identifier == connection.Identifier));
             }
 
