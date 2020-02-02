@@ -1,5 +1,4 @@
 ﻿using DbConnectionProvider.Abstractions;
-using DbConnectionProvider.Configurations;
 using System.Collections.Generic;
 using System.Linq;
 
