@@ -2,6 +2,12 @@
 
 namespace DbConnectionProvider.Abstractions
 {
+    /// <summary>
+    /// Defines database transaction manager which triggers actions on enlisted transaction objects.
+    /// Actions can be locked by owner identifier.
+    /// Please note it currently does not support distributed transactions. Transactions to multiple databases will be commited independently.
+    /// Feature will be added after .NET 5.0 release, when the required support is implemented.
+    /// </summary>
     public interface IDbTransactionManager
     {
         public void SetTransactionOwner(Guid ownerID);
