@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <Authors>Mateo Mađerić</Authors>
     <Description>Provides definitions for database connection providers and transaction managers.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
