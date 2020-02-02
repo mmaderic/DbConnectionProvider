@@ -96,6 +96,14 @@ namespace DbConnectionProvider
             }
         }
 
+        public (TConnection connection, TTransaction transaction) ProvideTransactionScoped()
+        {
+            var connection = ProvideConnection();
+            var transaction = ProvideTransaction();
+
+            return (connection, transaction);
+        }
+
         public void CommitTransaction()
         {
             lock (lockObject)

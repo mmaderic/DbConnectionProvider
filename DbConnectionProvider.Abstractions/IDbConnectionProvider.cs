@@ -56,5 +56,11 @@ namespace DbConnectionProvider.Abstractions
         /// </summary>
         /// <returns>Enlisted or new database transaction object</returns>
         public TTransaction ProvideTransaction();
+
+        /// <summary>
+        /// Will provide connection with enlisted transaction objects tuple
+        /// </summary>
+        /// <returns>Enlisted or new database connection and transaction objects tuple</returns>
+        public (TConnection connection, TTransaction transaction) ProvideTransactionScoped();
     }
 }

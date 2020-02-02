@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DbConnectionProvider.Configurations
+namespace DbConnectionProvider
 {
     public class ConnectionStringConfiguration
     {
