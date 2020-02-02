@@ -5,6 +5,10 @@ using System.Linq;
 
 namespace DbConnectionProvider
 {
+    /// <summary>
+    /// Connection string provider which distincts and returns connection string defined by string identifier   
+    /// It is recomended to register it as a singleton service, using factory with parsed collection of connection string configuration objects passed as a parameter.
+    /// </summary>
     public class ConnectionStringProvider : IDbConnectionStringProvider
     {
         private readonly IEnumerable<ConnectionStringConfiguration> _connectionStrings;

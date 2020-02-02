@@ -9,6 +9,11 @@ namespace DbConnectionProvider
 {
     public class ConnectionResolver : IDbConnectionResolver
     {
+        /// <summary>
+        /// Database connection resolver which distincts and returns connection provider defined by string identifier.
+        /// It is recomended to register it as a scoped service.
+        /// Please note you need to register IDbConnectionProvider base interfaces using factory method. Refer to github documentation for example.
+        /// </summary>
         private readonly IEnumerable<IDbConnectionProvider> _connectionProviders;
 
         public ConnectionResolver(IServiceProvider servicesProvider) =>
