@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbConnectionProvider", "DbC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbConnectionProvider.Abstractions", "DbConnectionProvider.Abstractions\DbConnectionProvider.Abstractions.csproj", "{50165223-56DF-4141-8C91-5EA9CFFEC191}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbConnectionProvider.SqlServer", "DbConnectionProvider.SqlServer\DbConnectionProvider.SqlServer.csproj", "{22E917C7-B3AA-486C-AE33-3D82479BCF32}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{50165223-56DF-4141-8C91-5EA9CFFEC191}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50165223-56DF-4141-8C91-5EA9CFFEC191}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50165223-56DF-4141-8C91-5EA9CFFEC191}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22E917C7-B3AA-486C-AE33-3D82479BCF32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22E917C7-B3AA-486C-AE33-3D82479BCF32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22E917C7-B3AA-486C-AE33-3D82479BCF32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22E917C7-B3AA-486C-AE33-3D82479BCF32}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
