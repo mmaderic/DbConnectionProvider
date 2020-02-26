@@ -2,6 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Authors>Mateo Mađerić</Authors>
+    <Description>Sql server connection provider implementation</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/mmaderic/DbConnectionProvider</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/mmaderic/DbConnectionProvider</RepositoryUrl>
+    <RepositoryType>Github</RepositoryType>
+    <Version>1.0.0</Version>
   </PropertyGroup>
 
   <ItemGroup>

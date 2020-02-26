@@ -104,6 +104,14 @@ namespace DbConnectionProvider
             return (connection, transaction);
         }
 
+        public (TConnection connection, TTransaction transaction) ProvideTransactionLess()
+        {
+            var connection = ProvideConnection();
+            var transaction = GetCurrentTransaction();
+
+            return (connection, transaction);
+        }
+
         public void CommitTransaction()
         {
             lock (lockObject)
@@ -145,6 +153,6 @@ namespace DbConnectionProvider
 
                 _connection = default;
             }
-        }       
+        }               
     }
 }
