@@ -17,27 +17,9 @@ namespace DbConnectionProvider.SqlServer
         public static IServiceCollection AddSqlConnectionProviders(
             this IServiceCollection serviceCollection, IConfiguration configuration, string connectionStringsSection = "ConnectionStrings")
         {
-            var connectionStrings = configuration.ReadConnectionStrings(connectionStringsSection);
+            var connectionStringConfigurations = configuration.ReadConnectionStrings(connectionStringsSection);
 
-            serviceCollection.AddSingleton<IDbConnectionStringProvider, ConnectionStringProvider>(
-               x => new ConnectionStringProvider(connectionStrings));
-
-            foreach (var connection in connectionStrings)
-            {
-                serviceCollection.AddScoped<IDbConnectionProvider<SqlConnection, SqlTransaction>>(
-                    x => new SqlConnectionProvider(connection.ConnectionString, connection.Identifier));
-
-                serviceCollection.AddScoped<IDbConnectionProvider>(x => x.GetServices<IDbConnectionProvider<SqlConnection, SqlTransaction>>()
-                    .Single(x => x.Identifier == connection.Identifier));
-
-                serviceCollection.AddScoped(x => (SqlConnectionProvider) x.GetServices<IDbConnectionProvider<SqlConnection, SqlTransaction>>()
-                    .Single(x => x.Identifier == connection.Identifier));
-            }
-
-            serviceCollection.AddScoped<IDbConnectionResolver, ConnectionResolver>();
-            serviceCollection.AddScoped<IDbTransactionManager, TransactionManager>();
-
-            return serviceCollection;
+            return serviceCollection.AddSqlConnectionProviders(connectionStringConfigurations);
         }
 
         /// <summary>
@@ -47,23 +29,25 @@ namespace DbConnectionProvider.SqlServer
         public static IServiceCollection AddSqlConnectionProviders(
             this IServiceCollection serviceCollection, IEnumerable<ConnectionStringConfiguration> connectionStringConfigurations)
         {
-            serviceCollection.AddSingleton<IDbConnectionStringProvider, ConnectionStringProvider>(
-                x => new ConnectionStringProvider(connectionStringConfigurations));
+            serviceCollection.AddSingleton(x => new ConnectionStringProvider(connectionStringConfigurations));
+            serviceCollection.AddSingleton<IDbConnectionStringProvider>(x => x.GetRequiredService<ConnectionStringProvider>());
 
             foreach (var connection in connectionStringConfigurations)
             {
+                serviceCollection.AddScoped(x => new SqlConnectionProvider(connection.ConnectionString, connection.Identifier));
+
+                serviceCollection.AddScoped<IDbConnectionProvider>(
+                    x => x.GetServices<SqlConnectionProvider>().Single(x => x.Identifier == connection.Identifier));
+
                 serviceCollection.AddScoped<IDbConnectionProvider<SqlConnection, SqlTransaction>>(
-                    x => new SqlConnectionProvider(connection.ConnectionString, connection.Identifier));
-
-                serviceCollection.AddScoped<IDbConnectionProvider>(x => x.GetServices<IDbConnectionProvider<SqlConnection, SqlTransaction>>()
-                    .Single(x => x.Identifier == connection.Identifier));
-
-                serviceCollection.AddScoped(x => (SqlConnectionProvider)x.GetServices<IDbConnectionProvider<SqlConnection, SqlTransaction>>()
-                    .Single(x => x.Identifier == connection.Identifier));
+                    x => x.GetServices<SqlConnectionProvider>().Single(x => x.Identifier == connection.Identifier));
             }
 
-            serviceCollection.AddScoped<IDbConnectionResolver, ConnectionResolver>();
-            serviceCollection.AddScoped<IDbTransactionManager, TransactionManager>();
+            serviceCollection.AddScoped<ConnectionResolver>();
+            serviceCollection.AddScoped<TransactionManager>();
+
+            serviceCollection.AddScoped<IDbConnectionResolver>(x => x.GetRequiredService<ConnectionResolver>());
+            serviceCollection.AddScoped<IDbTransactionManager>(x => x.GetRequiredService<TransactionManager>());
 
             return serviceCollection;
         }
@@ -75,20 +59,9 @@ namespace DbConnectionProvider.SqlServer
         public static IServiceCollection AddSqlConnectionProvider(
             this IServiceCollection serviceCollection, IConfiguration configuration, bool registerTransactionManager = true, string connectionStringsSection = "ConnectionStrings")
         {
-            var connectionString = configuration.ReadConnectionStrings(connectionStringsSection).Single();
+            var connectionStringConfiguration = configuration.ReadConnectionStrings(connectionStringsSection).Single();
 
-            serviceCollection.AddScoped<IDbConnectionProvider<SqlConnection, SqlTransaction>>(
-                x => new SqlConnectionProvider(connectionString.ConnectionString));
-
-            serviceCollection.AddScoped(x => (SqlConnectionProvider)x.GetService<IDbConnectionProvider<SqlConnection, SqlTransaction>>());
-
-            if (registerTransactionManager)
-            {
-                serviceCollection.AddScoped<IDbConnectionProvider>(x => x.GetService<IDbConnectionProvider<SqlConnection, SqlTransaction>>());
-                serviceCollection.AddScoped<IDbTransactionManager, TransactionManager>();
-            }
-
-            return serviceCollection;
+            return serviceCollection.AddSqlConnectionProvider(connectionStringConfiguration.ConnectionString, registerTransactionManager);
         }
 
         /// <summary>  
@@ -97,15 +70,15 @@ namespace DbConnectionProvider.SqlServer
         /// </summary>
         public static IServiceCollection AddSqlConnectionProvider(this IServiceCollection serviceCollection, string connectionString, bool registerTransactionManager = true)
         {
-            serviceCollection.AddScoped<IDbConnectionProvider<SqlConnection, SqlTransaction>>(
-                x => new SqlConnectionProvider(connectionString));
-
-            serviceCollection.AddScoped(x => (SqlConnectionProvider) x.GetService<IDbConnectionProvider<SqlConnection, SqlTransaction>>());
+            serviceCollection.AddScoped(x => new SqlConnectionProvider(connectionString));
+            serviceCollection.AddScoped<IDbConnectionProvider<SqlConnection, SqlTransaction>>(x => x.GetRequiredService<SqlConnectionProvider>());
 
             if (registerTransactionManager)
             {
-                serviceCollection.AddScoped<IDbConnectionProvider>(x => x.GetService<IDbConnectionProvider<SqlConnection, SqlTransaction>>());
-                serviceCollection.AddScoped<IDbTransactionManager, TransactionManager>();
+                serviceCollection.AddScoped<IDbConnectionProvider>(x => x.GetRequiredService<SqlConnectionProvider>());
+
+                serviceCollection.AddScoped<TransactionManager>();
+                serviceCollection.AddScoped<IDbTransactionManager>(x => x.GetRequiredService<TransactionManager>());
             }
 
             return serviceCollection;
@@ -117,16 +90,18 @@ namespace DbConnectionProvider.SqlServer
         public static IServiceCollection AddSqlConnectionProvider(
             this IServiceCollection serviceCollection, Func<IServiceProvider, SqlConnectionProvider> implementationFactory, bool registerTransactionManager = true)
         {
-            serviceCollection.AddScoped<IDbConnectionProvider<SqlConnection, SqlTransaction>>(implementationFactory);
-            serviceCollection.AddScoped(x => (SqlConnectionProvider) x.GetService<IDbConnectionProvider<SqlConnection, SqlTransaction>>());
+            serviceCollection.AddScoped(implementationFactory);
+            serviceCollection.AddScoped<IDbConnectionProvider<SqlConnection, SqlTransaction>>(x => x.GetRequiredService<SqlConnectionProvider>());
 
             if (registerTransactionManager)
             {
-                serviceCollection.AddScoped<IDbConnectionProvider>(x => x.GetService<IDbConnectionProvider<SqlConnection, SqlTransaction>>());
-                serviceCollection.AddScoped<IDbTransactionManager, TransactionManager>();
+                serviceCollection.AddScoped<IDbConnectionProvider>(x => x.GetRequiredService<SqlConnectionProvider>());
+
+                serviceCollection.AddScoped<TransactionManager>();
+                serviceCollection.AddScoped<IDbTransactionManager>(x => x.GetRequiredService<TransactionManager>());
             }
 
             return serviceCollection;
-        }
+        } 
     }
 }
