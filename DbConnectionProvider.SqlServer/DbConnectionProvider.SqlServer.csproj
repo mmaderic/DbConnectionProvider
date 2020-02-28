@@ -8,7 +8,7 @@
     <PackageProjectUrl>https://github.com/mmaderic/DbConnectionProvider</PackageProjectUrl>
     <RepositoryUrl>https://github.com/mmaderic/DbConnectionProvider</RepositoryUrl>
     <RepositoryType>Github</RepositoryType>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>

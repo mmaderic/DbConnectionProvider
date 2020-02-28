@@ -43,7 +43,7 @@ namespace DbConnectionProvider.Abstractions
         /// Tries to open begin new database transaction. Throws exception if transaction has already been enlisted.
         /// </summary>
         /// <returns>New database transaction object</returns>
-        public TTransaction BeginTransaction();
+        public TTransaction BeginTransaction(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted);
 
         /// <summary>
         /// Returning already enlisted transaction object.
@@ -55,13 +55,13 @@ namespace DbConnectionProvider.Abstractions
         /// Will provide new or return already enlisted transaction object
         /// </summary>
         /// <returns>Enlisted or new database transaction object</returns>
-        public TTransaction ProvideTransaction();
+        public TTransaction ProvideTransaction(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted);
 
         /// <summary>
         /// Will provide connection with enlisted transaction objects tuple
         /// </summary>
         /// <returns>Enlisted or new database connection and transaction objects tuple</returns>
-        public (TConnection connection, TTransaction transaction) ProvideTransactionScoped();
+        public (TConnection connection, TTransaction transaction) ProvideTransactionScoped(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted);
 
         /// <summary>
         /// Will try to provide connection without enlisted transaction objects tuple

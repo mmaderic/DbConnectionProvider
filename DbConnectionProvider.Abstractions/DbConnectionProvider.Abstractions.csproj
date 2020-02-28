@@ -6,7 +6,7 @@
     <Authors>Mateo Mađerić</Authors>
     <Description>Provides definitions for database connection providers and transaction managers.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Version>1.2.1</Version>
+    <Version>1.2.2</Version>
     <PackageProjectUrl>https://github.com/mmaderic/DbConnectionProvider</PackageProjectUrl>
     <RepositoryUrl>https://github.com/mmaderic/DbConnectionProvider</RepositoryUrl>
     <RepositoryType>Github</RepositoryType>

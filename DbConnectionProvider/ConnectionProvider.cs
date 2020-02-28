@@ -61,7 +61,7 @@ namespace DbConnectionProvider
             }
         }
 
-        public TTransaction BeginTransaction()
+        public TTransaction BeginTransaction(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted)
         {
             lock (lockObject)
             {
@@ -71,7 +71,7 @@ namespace DbConnectionProvider
                 if (_connection is null)
                     throw new InvalidOperationException("There is no enlisted database connection.");
 
-                _transaction = (TTransaction)_connection.BeginTransaction();
+                _transaction = (TTransaction)_connection.BeginTransaction(isolationLevel);
 
                 return _transaction;
             }
@@ -80,26 +80,26 @@ namespace DbConnectionProvider
         public TTransaction GetCurrentTransaction()
             => _transaction;
 
-        public TTransaction ProvideTransaction()
+        public TTransaction ProvideTransaction(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted)
         {
             lock (lockObject)
             {
-                if(!(_transaction is null))
+                if (!(_transaction is null))
                     return _transaction;
 
                 if (_connection is null)
                     throw new InvalidOperationException("There is no enlisted database connection.");
-             
-                _transaction = (TTransaction) _connection.BeginTransaction();     
+
+                _transaction = (TTransaction)_connection.BeginTransaction(isolationLevel);
 
                 return _transaction;
             }
         }
 
-        public (TConnection connection, TTransaction transaction) ProvideTransactionScoped()
+        public (TConnection connection, TTransaction transaction) ProvideTransactionScoped(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted)
         {
             var connection = ProvideConnection();
-            var transaction = ProvideTransaction();
+            var transaction = ProvideTransaction(isolationLevel);
 
             return (connection, transaction);
         }
